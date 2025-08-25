@@ -1,0 +1,179 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, #f0db4f, #f5de1a);
+    color: #323330;
+    padding: 2rem 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.js-logo {
+    background-color: #323330;
+    color: #f0db4f;
+    font-weight: bold;
+    font-family: 'Source Code Pro', monospace;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* Navigation Styles */
+nav {
+    background-color: #323330;
+    padding: 1rem 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 1.5rem;
+}
+
+nav a {
+    color: #f0db4f;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+/* Main Content Styles */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #323330;
+    border-bottom: 2px solid #f0db4f;
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.feature {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 5px;
+    border-left: 4px solid #f0db4f;
+}
+
+.feature h3 {
+    margin-top: 0;
+    color: #323330;
+}
+
+/* Code Example */
+.code-example {
+    background-color: #323330;
+    color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.9rem;
+}
+
+/* Frameworks Section */
+.frameworks-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.framework {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.framework:hover {
+    transform: translateY(-5px);
+}
+
+.framework h3 {
+    color: #323330;
+    margin-top: 0;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #323330;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+.social-links {
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: #f0db4f;
+    margin: 0 1rem;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}ng:2rem 0}
