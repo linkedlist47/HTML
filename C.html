@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming Language</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Consolas', 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #2d2d2d;
+            color: #569cd6;
+            padding: 1.5rem 0;
+            text-align: center;
+            border-bottom: 3px solid #569cd6;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+        
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.1rem;
+            color: #9cdcfe;
+        }
+        
+        /* Navigation Styles */
+        nav {
+            background-color: #252526;
+            padding: 0.8rem 0;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav li {
+            margin: 0 1.8rem;
+        }
+        
+        nav a {
+            color: #d7ba7d;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ffd700;
+        }
+        
+        /* Main Content Styles */
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background-color: #252526;
+            padding: 1.8rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #569cd6;
+        }
+        
+        h2 {
+            color: #569cd6;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: #4ec9b0;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Features List */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .feature-item {
+            background-color: #2d2d2d;
+            padding: 1.2rem;
+            border-radius: 4px;
+            border: 1px solid #3a3a3a;
+        }
+        
+        /* Code Example */
+        .code-example {
+            background-color: #1e1e1e;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #3a3a3a;
+            margin-top: 1.5rem;
+        }
+        
+        pre {
+            margin: 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95rem;
+            color: #d4d4d4;
+        }
+        
+        .keyword {
+            color: #569cd6;
+        }
+        
+        .function {
+            color: #dcdcaa;
+        }
+        
+        .string {
+            color: #ce9178;
+        }
+        
+        .comment {
+            color: #6a9955;
+        }
+        
+        /* History Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.7rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #569cd6;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.3rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: #569cd6;
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: #d7ba7d;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #252526;
+            color: #9cdcfe;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid #3a3a3a;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            color: #d7ba7d;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: #ffd700;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>C Programming Language</h1>
+        <p>The foundation of modern computing</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#history">History</a></li>
+            <li><a href="#example">Example</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section id="overview" class="section">
+            <h2>Overview</h2>
+            <p>C is a general-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion, with a static type system. By design, C provides constructs that map efficiently to typical machine instructions.</p>
+            <p>It has found lasting use in applications previously coded in assembly language. Such applications include operating systems and various application software for computer architectures that range from supercomputers to PLCs and embedded systems.</p>
+        </section>
+        
+        <section id="features" class="section">
+            <h2>Key Features</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <h3>Efficiency</h3>
+                    <p>C provides low-level access to memory and requires minimal runtime support, making it highly efficient.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Portability</h3>
+                    <p>C programs can be compiled for a wide variety of platforms with minimal changes to the source code.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Flexibility</h3>
+                    <p>C allows direct manipulation of hardware and memory, making it suitable for system programming.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Standard Library</h3>
+                    <p>C comes with a rich set of library functions for I/O, string handling, mathematics, and more.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="history" class="section">
+            <h2>History</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-year">1972</span>
+                    <p>C was developed at Bell Labs by Dennis Ritchie as a successor to the B language.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">1978</span>
+                    <p>The first edition of "The C Programming Language" by Kernighan and Ritchie was published.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">1989</span>
+                    <p>The ANSI C standard (C89) was published, standardizing the language.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">1999</span>
+                    <p>The C99 standard introduced new features like variable-length arrays and complex numbers.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2011</span>
+                    <p>C11 added multi-threading support and other modern features.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="example" class="section">
+            <h2>Example Code</h2>
+            <p>Here's a simple "Hello, World!" program in C:</p>
+            <div class="code-example">
+                <pre><span class="keyword">#include</span> <span class="string">&lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> <span class="function">main</span>() {
+    <span class="function">printf</span>(<span class="string">"Hello, World!\n"</span>);
+    <span class="keyword">return</span> 0;
+    <span class="comment">// This is a simple C program</span>
+}</pre>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 C Programming Language. The mother of all modern languages.</p>
+        <div class="footer-links">
+            <a href="#">Documentation</a>
+            <a href="#">Tutorials</a>
+            <a href="#">Community</a>
+        </div>
+    </footer>
+</body>
+          </html>
