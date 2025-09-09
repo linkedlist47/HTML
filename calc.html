@@ -46,7 +46,7 @@
      .btn {
         border-radius: 4px;
         font-size: large;
-        
+
      }
      .btn:hover {
         background-color: cornflowerblue;
@@ -69,12 +69,14 @@
             <button class = "btn" onclick="appendtodisplay(1)">1</button>
             <button class = "btn" onclick="appendtodisplay(2)">2</button>
             <button class = "btn" onclick="appendtodisplay(3)">3</button>
+            
             <button class = "btn" onclick="operators('+')">+</button>
-            <button class = "btn" onclick="clears()">clear</button>
+            <button class = "btn" onclick="appendtodisplay(0)">0</button>
+            
             <button class = "btn" onclick="elvalute()">=</button>
             <button class = "btn" onclick="decimal('.')">.</button>
             <button class = "btn" onclick="operators('-')">-</button>
-    
+            <button class = "btn" onclick="clears()">clear</button>
 
         </div>
     </div>
@@ -103,7 +105,6 @@
                 display+='.';
             }
         }
-        
 
     </script>
 </body>
