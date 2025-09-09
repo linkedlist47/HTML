@@ -18,7 +18,8 @@
         height: 280px;
         background-color: rgb(66, 104, 173);
         padding: 20px;
-        
+        border-radius: 5px;
+        box-shadow: 10px 10px 0px rgb(53, 52, 52);
 
 
      }
@@ -39,6 +40,10 @@
         
 
      }
+     .btn:hover {
+        background-color: cornflowerblue;
+     }
+     
     </style>
 </head>
 <body>
@@ -75,7 +80,12 @@
             
         }
         function elvalute() {
+            try{
             display.value = eval(display.value);
+            }
+            catch {
+                display.value = "Error nigger"
+            }
         }
         function operators (op) {
             display.value += " " + op + " ";
