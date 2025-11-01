@@ -582,32 +582,32 @@ footer {
                 <?php
                 $faculty_members = [
                     [
-                        'name' => 'Dr. Sarah Johnson',
+                        'name' => 'Bruce wayne',
                         'role' => 'Professor & Head of Department',
                         'expertise' => 'Machine Learning, Natural Language Processing'
                     ],
                     [
-                        'name' => 'Dr. Michael Chen',
+                        'name' => 'Dr. Jin sakai',
                         'role' => 'Associate Professor',
                         'expertise' => 'Computer Vision, Deep Learning'
                     ],
                     [
-                        'name' => 'Dr. Priya Sharma',
+                        'name' => 'Dr. Sample kumar',
                         'role' => 'Assistant Professor',
                         'expertise' => 'Data Mining, Big Data Analytics'
                     ],
                     [
-                        'name' => 'Dr. Robert Brown',
+                        'name' => 'Dr. idk',
                         'role' => 'Professor',
                         'expertise' => 'Reinforcement Learning, Robotics'
                     ],
                     [
-                        'name' => 'Dr. Emily Davis',
+                        'name' => 'Dr. luffy',
                         'role' => 'Associate Professor',
                         'expertise' => 'Statistical Learning, Optimization'
                     ],
                     [
-                        'name' => 'Dr. James Wilson',
+                        'name' => 'Dr. who',
                         'role' => 'Assistant Professor',
                         'expertise' => 'AI Ethics, Explainable AI'
                     ]
