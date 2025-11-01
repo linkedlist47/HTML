@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container { max-width: 800px; margin-top: 30px; }
+        .table-actions { white-space: nowrap; }
+        .alert { margin-top: 20px; }
+        .card { margin-bottom: 20px; }
+        .required:after { content: " *"; color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">User Management System</h1>
+        
+        <div id="message"></div>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0" id="form-title">Add New User</h5>
+            </div>
+            <div class="card-body">
+                <form id="user-form">
+                    <input type="hidden" id="user-id" name="id" value="">
+                    
+                    <div class="mb-3">
+                        <label for="name" class="form-label required">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label required">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Create User</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-btn" style="display: none;">Cancel</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Users List -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Users List</h5>
+            </div>
+            <div class="card-body">
+                <div id="users-table-container">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- Users will be populated here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="no-users-message" class="text-muted">
+                    <p>No users found.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // User Management Class
+        class UserManager {
+            constructor() {
+                this.users = JSON.parse(localStorage.getItem('users')) || [];
+                this.nextId = this.users.length > 0 ? Math.max(...this.users.map(u => u.id)) + 1 : 1;
+                this.currentEditId = null;
+                
+                this.initializeEventListeners();
+                this.renderUsers();
+            }
+            
+            initializeEventListeners() {
+                document.getElementById('user-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleFormSubmit();
+                });
+                
+                document.getElementById('cancel-btn').addEventListener('click', () => {
+                    this.resetForm();
+                });
+            }
+            
+            handleFormSubmit() {
+                const formData = new FormData(document.getElementById('user-form'));
+                const userData = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone')
+                };
+                
+                // Basic validation
+                if (!userData.name || !userData.email) {
+                    this.showMessage('Please fill in all required fields.', 'danger');
+                    return;
+                }
+                
+                // Email validation
+                if (!this.isValidEmail(userData.email)) {
+                    this.showMessage('Please enter a valid email address.', 'danger');
+                    return;
+                }
+                
+                // Check for duplicate email (excluding current user being edited)
+                const existingUser = this.users.find(user => 
+                    user.email === userData.email && user.id !== this.currentEditId
+                );
+                
+                if (existingUser) {
+                    this.showMessage('A user with this email already exists.', 'danger');
+                    return;
+                }
+                
+                if (this.currentEditId) {
+                    this.updateUser(this.currentEditId, userData);
+                } else {
+                    this.createUser(userData);
+                }
+            }
+            
+            createUser(userData) {
+                const newUser = {
+                    id: this.nextId++,
+                    ...userData,
+                    created_at: new Date().toISOString()
+                };
+                
+                this.users.push(newUser);
+                this.saveToStorage();
+                this.showMessage('User was created successfully.', 'success');
+                this.resetForm();
+                this.renderUsers();
+            }
+            
+            updateUser(id, userData) {
+                const userIndex = this.users.findIndex(user => user.id === id);
+                if (userIndex !== -1) {
+                    this.users[userIndex] = {
+                        ...this.users[userIndex],
+                        ...userData
+                    };
+                    
+                    this.saveToStorage();
+                    this.showMessage('User was updated successfully.', 'success');
+                    this.resetForm();
+                    this.renderUsers();
+                }
+            }
+            
+            editUser(id) {
+                const user = this.users.find(user => user.id === id);
+                if (user) {
+                    document.getElementById('user-id').value = user.id;
+                    document.getElementById('name').value = user.name;
+                    document.getElementById('email').value = user.email;
+                    document.getElementById('phone').value = user.phone || '';
+                    
+                    this.currentEditId = id;
+                    document.getElementById('form-title').textContent = 'Edit User';
+                    document.getElementById('submit-btn').textContent = 'Update User';
+                    document.getElementById('cancel-btn').style.display = 'inline-block';
+                }
+            }
+            
+            resetForm() {
+                document.getElementById('user-form').reset();
+                document.getElementById('user-id').value = '';
+                this.currentEditId = null;
+                document.getElementById('form-title').textContent = 'Add New User';
+                document.getElementById('submit-btn').textContent = 'Create User';
+                document.getElementById('cancel-btn').style.display = 'none';
+            }
+            
+            renderUsers() {
+                const tableBody = document.getElementById('users-table-body');
+                const noUsersMessage = document.getElementById('no-users-message');
+                const tableContainer = document.getElementById('users-table-container');
+                
+                if (this.users.length === 0) {
+                    tableContainer.style.display = 'none';
+                    noUsersMessage.style.display = 'block';
+                    return;
+                }
+                
+                tableContainer.style.display = 'block';
+                noUsersMessage.style.display = 'none';
+                
+                tableBody.innerHTML = '';
+                
+                this.users.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                    .forEach(user => {
+                        const row = document.createElement('tr');
+                        
+                        row.innerHTML = `
+                            <td>${user.id}</td>
+                            <td>${this.escapeHtml(user.name)}</td>
+                            <td>${this.escapeHtml(user.email)}</td>
+                            <td>${this.escapeHtml(user.phone || '')}</td>
+                            <td class="table-actions">
+                                <button class="btn btn-sm btn-warning edit-btn" data-id="${user.id}">Edit</button>
+                            </td>
+                        `;
+                        
+                        tableBody.appendChild(row);
+                    });
+                
+                // Add event listeners to edit buttons
+                document.querySelectorAll('.edit-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const userId = parseInt(e.target.getAttribute('data-id'));
+                        this.editUser(userId);
+                    });
+                });
+            }
+            
+            showMessage(message, type) {
+                const messageDiv = document.getElementById('message');
+                messageDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+                
+                // Auto-hide message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.innerHTML = '';
+                }, 5000);
+            }
+            
+            saveToStorage() {
+                localStorage.setItem('users', JSON.stringify(this.users));
+            }
+            
+            isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+
+        // Initialize the application when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new UserManager();
+        });
+    </script>
+</body>
+</html>
