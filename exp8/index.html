@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Learning Hub - Master PHP Programming</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #764ba2;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Articles Section */
+        .articles-section {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 4rem 0;
+            margin-top: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Article Cards */
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-category {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .category-beginner {
+            background: #e6fffa;
+            color: #234e52;
+        }
+
+        .category-intermediate {
+            background: #ebf8ff;
+            color: #1a365d;
+        }
+
+        .category-advanced {
+            background: #fff5f5;
+            color: #742a2a;
+        }
+
+        .article-title {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        .article-summary {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .read-more:hover {
+            gap: 0.8rem;
+        }
+
+        /* Features Section */
+        .features {
+            background: #f7fafc;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">PHP<span>Hub</span></a>
+                <ul class="nav-links">
+                    <li><a href="#articles">Articles</a></li>
+                    <li><a href="#tutorials">Tutorials</a></li>
+                    <li><a href="#examples">Examples</a></li>
+                    <li><a href="#community">Community</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Master PHP Programming</h1>
+            <p>Learn modern PHP development with comprehensive tutorials, practical examples, and best practices from industry experts.</p>
+            <a href="#articles" class="cta-button">Start Learning Today</a>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section class="articles-section" id="articles">
+        <div class="container">
+            <h2 class="section-title">Featured Articles</h2>
+            <div class="articles-grid">
+                <!-- Article 1 -->
+                <article class="article-card">
+                    <span class="article-category category-beginner">Beginner</span>
+                    <h3 class="article-title">Getting Started with PHP 8: New Features & Syntax</h3>
+                    <div class="article-meta">
+                        <span>By John Developer</span>
+                        <span>Jan 15, 2024</span>
+                        <span>5 min read</span>
+                    </div>
+                    <p class="article-summary">
+                        Discover the latest features in PHP 8 including attributes, union types, match expressions, and the nullsafe operator.
+                    </p>
+                    <a href="#" class="read-more">
+                        Read Article →
+                    </a>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="article-card">
+                    <span class="article-category category-intermediate">Intermediate</span>
+                    <h3 class="article-title">Object-Oriented PHP: Best Practices & Design Patterns</h3>
+                    <div class="article-meta">
+                        <span>By Sarah Coder</span>
+                        <span>Jan 12, 2024</span>
+                        <span>8 min read</span>
+                    </div>
+                    <p class="article-summary">
+                        Master OOP concepts in PHP with practical examples of inheritance, polymorphism, and popular design patterns.
+                    </p>
+                    <a href="#" class="read-more">
+                        Read Article →
+                    </a>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="article-card">
+                    <span class="article-category category-advanced">Advanced</span>
+                    <h3 class="article-title">Building RESTful APIs with Laravel & PHP</h3>
+                    <div class="article-meta">
+                        <span>By Mike Architect</span>
+                        <span>Jan 10, 2024</span>
+                        <span>12 min read</span>
+                    </div>
+                    <p class="article-summary">
+                        Learn to create robust, scalable REST APIs using Laravel framework with authentication, validation, and testing.
+                    </p>
+                    <a href="#" class="read-more">
+                        Read Article →
+                    </a>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="article-card">
+                    <span class="article-category category-intermediate">Intermediate</span>
+                    <h3 class="article-title">Database Management with PDO & MySQLi</h3>
+                    <div class="article-meta">
+                        <span>By Anna Database</span>
+                        <span>Jan 8, 2024</span>
+                        <span>6 min read</span>
+                    </div>
+                    <p class="article-summary">
+                        Comprehensive guide to secure database operations using PDO and MySQLi with prepared statements.
+                    </p>
+                    <a href="#" class="read-more">
+                        Read Article →
+                    </a>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="article-card">
+                    <span class="article-category category-beginner">Beginner</span>
+                    <h3 class="article-title">PHP Security Essentials: Protecting Your Applications</h3>
+                    <div class="article-meta">
+                        <span>By David Security</span>
+                        <span>Jan 5, 2024</span>
+                        <span>7 min read</span>
+                    </div>
+                    <p class="article-summary">
+                        Essential security practices every PHP developer should know to protect against common vulnerabilities.
+                    </p>
+                    <a href="#" class="read-more">
+                        Read Article →
+                    </a>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="article-card">
+                    <span class="article-category category-advanced">Advanced</span>
+                    <h3 class="article-title">Performance Optimization in PHP Applications</h3>
+                    <div class="article-meta">
+                        <span>By Lisa Optimizer</span>
+                        <span>Jan 3, 2024</span>
+                        <span>10 min read</span>
+                    </div>
+                    <p class="article-summary">
+                        Advanced techniques for optimizing PHP application performance, caching strategies, and database optimization.
+                    </p>
+                    <a href="#" class="read-more">
+                        Read Article →
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Learn With Us?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3 class="feature-title">Comprehensive Content</h3>
+                    <p>From beginner basics to advanced topics, we cover everything you need to master PHP.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3 class="feature-title">Practical Examples</h3>
+                    <p>Learn with real-world code examples and projects you can use in your own applications.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Regular Updates</h3>
+                    <p>Content is regularly updated to reflect the latest PHP versions and best practices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="feature-title">Community Support</h3>
+                    <p>Join our community of PHP developers to share knowledge and get help.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>PHP<span style="color: #667eea;">Hub</span></h3>
+                    <p>Master PHP Programming Together</p>
+                </div>
+                <ul class="footer-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                </ul>
+            </div>
+            <p style="margin-top: 2rem; color: #a0aec0;">&copy; 2024 PHP Learning Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add subtle animation to article cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe article cards
+        document.querySelectorAll('.article-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
